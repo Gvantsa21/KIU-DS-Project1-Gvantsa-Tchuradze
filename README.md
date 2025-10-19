@@ -8,7 +8,7 @@
 ## Student
 
 * **Name:** *Gvantsa Tchuradze*
-* **Student ID:** *SXXXX*
+* **Student ID:** not sure what student id is ... (Tchuradze.gvantsa@kiu.edu.ge?)
 * **Submission Date:** *2025-10-19*
 
 **Honor Code:** I certify that this work is my own and I have not plagiarized.
