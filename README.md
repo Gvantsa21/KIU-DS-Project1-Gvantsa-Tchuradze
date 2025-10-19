@@ -76,7 +76,7 @@ Using goals (8000 steps, 2000 calories, 60 active minutes), a small group meets 
 Surprising note: Because steps were generated with a lognormal distribution and clipped to realistic values, the simulated data has more consistent achievers than purely random numbers would — so be careful: how you create synthetic data can change conclusions.
 
 
-If you have questions about this repository, email: [your.email@example.com](mailto:Tchuradze.gvantsa@kiu.edu.ge)
+If you have questions about this repository, email: [Tchuradze.gvantsa@kiu.edu.ge](mailto:Tchuradze.gvantsa@kiu.edu.ge)
 
 ---
 
