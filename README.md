@@ -33,52 +33,50 @@ This repository is prepared according to the course submission guidelines and ve
 * Python 3.10+ recommended
 * `numpy==1.24.3` (exact version required by course)
 
-Install dependencies with:
-
-```bash
-pip install -r requirements.txt
-```
-
-`requirements.txt` content (required by course):
-
-```
-numpy==1.24.3
-```
-
----
-
+I
 ## How to run
 
 **Python script:**
 
 ```bash
-python Project1_FirstName_LastName.py
+python Project1_GVantsa_Tchuradze.py
 ```
-
-Make sure the script prints the requested outputs for each task (Course statistics, top performers, temperature and sales analyses, Task 3 console summary, etc.).
-
 ---
 
 ## Summary of findings (Task 3)
 
-*This section provides the required analysis summary of the simulated fitness dataset (≥300 words).*
+This project uses a simulated dataset of 100 users over 90 days with four daily metrics: steps, calories, active minutes, and average heart rate. I first added some problems to the data to make it realistic: about 5% missing values (NaNs) to imitate device failures and 2% extreme outliers. To clean the data I removed outliers using the IQR method for each metric, then filled missing values with the mean of that metric. Doing outlier removal first makes the mean used for imputation more reliable.
 
-The simulated dataset models 100 users across 90 days with 4 metrics: daily steps, calories, active minutes, and average heart rate. After introducing realistic data issues (5% random NaNs to mimic device failures and 2% extreme outliers) the data cleaning pipeline removed outliers using the IQR method per metric and then replaced missing values with per-metric means. This two-step approach reduces bias from extreme values when computing imputation values. The cleaned dataset enables reliable per-user aggregation and population-level temporal analysis.
+After cleaning, I looked for patterns:
 
-Key user behavior patterns show a diversified activity distribution. Users cluster into three activity bands (Low/Medium/High) based on step percentiles: roughly 25% low, 50% medium, 25% high. The top 10 active users (by combined z-score across metrics) show consistent high daily step counts, elevated active minutes, and slightly higher-than-average calorie burn, suggesting a correlation between steps and calories. Consistency analysis (lowest mean std deviation across metrics) highlights a subset of users with predictable daily routines — useful for personalized recommendations.
+Users naturally fall into three activity groups by average steps: low (≈25%), medium (≈50%), and high (≈25%).
 
-Temporal trends reveal weekly periodicity with day-of-week effects: higher activity on mid-week days and small dips on weekends for the aggregate population, though subgroups behave differently. A 7-day rolling mean smooths daily volatility and uncovers subtle increasing/decreasing trends; linear slope estimation per metric is used to quantify trend directions. Month-over-month growth (three 30-day windows) provides coarse-grained seasonality — useful for marketing campaigns or feature-testing windows.
+The top 10 users (by a combined z-score across metrics) have higher steps, more active minutes, and burn more calories — so steps and calories are linked.
 
-Correlation analysis indicates expected relationships: steps and calories are positively correlated; active minutes correlate with steps and calories; average heart rate correlates weakly with other metrics. Age shows a modest negative correlation with average steps, while gender-based averages differ slightly — insights that can inform targeted interventions.
+Some users are very consistent day-to-day (low variation), which is useful for making personalized suggestions.
 
-Health score (a weighted z‑sum) ranks users by a composite measure; selecting weights (0.4 steps, 0.2 calories, 0.35 active_minutes, 0.05 heart rate) emphasizes physical activity. Goal achievement analysis (8000 steps, 2000 calories, 60 active minutes) reports the fraction of days each user meets all goals; a small subset meets goals ≥80% of days and can be considered consistent achievers for rewards or beta features.
+Time patterns:
 
-**Most surprising finding:** The dataset often shows more consistent achievers than purely random data would suggest because of the lognormal steps generation and clipping that concentrates values around realistic daily step medians — a reminder that synthetic data choices strongly shape downstream conclusions.
+There is a weekly rhythm (day-of-week effect): activity usually dips slightly on weekends and is higher mid-week.
 
-**Recommendations:** (1) Use targeted nudges for medium-activity users to convert them to higher engagement; (2) Investigate device reliability and missingness patterns before production deployment; (3) Consider per-user baselines when defining goals to avoid penalizing older or less active users unjustly. Further improvements include richer metadata (occupation, device type) and longer time windows to assess retention effects.
+A 7-day rolling average smooths short-term noise and shows small trends over time.
+
+I also compared three 30-day windows to check month-over-month changes.
+
+Other findings:
+
+Steps and calories are positively correlated. Active minutes also correlate with these. Heart rate has a weaker correlation with the others.
+
+Age has a small negative link with steps (older users tend to have slightly fewer steps). Men and women show small differences in average steps.
+
+I created a simple health score (weighted z-sum) that ranks users — weights put most emphasis on steps and active minutes.
+
+Using goals (8000 steps, 2000 calories, 60 active minutes), a small group meets all three goals at least 80% of days.
+
+Surprising note: Because steps were generated with a lognormal distribution and clipped to realistic values, the simulated data has more consistent achievers than purely random numbers would — so be careful: how you create synthetic data can change conclusions.
 
 
-If you have questions about this repository, email: [your.email@example.com](mailto:your.email@example.com)
+If you have questions about this repository, email: [your.email@example.com](mailto:Tchuradze.gvantsa@kiu.edu.ge)
 
 ---
 
