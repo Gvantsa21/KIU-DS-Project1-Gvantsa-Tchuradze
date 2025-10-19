@@ -27,19 +27,6 @@ This repository is prepared according to the course submission guidelines and ve
 
 ---
 
-## Repository structure
-
-```
-KIU-DS-Project1-FirstName-LastName/
-├─ Project1_FirstName_LastName.ipynb   # Preferred submission (Jupyter Notebook)
-├─ Project1_FirstName_LastName.py      # Or Python script version
-├─ README.md                           # This file
-├─ requirements.txt                     # numpy==1.24.3
-├─ .gitignore                           # recommended (pycache, .ipynb_checkpoints)
-└─ data/                                # (optional) sample outputs or saved CSVs
-```
-
----
 
 ## Requirements
 
