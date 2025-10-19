@@ -1,200 +1,98 @@
-🧮 Project 1 
+# Project 1 — Python & NumPy Fundamentals
 
-Course: Introduction to Data Science with Python
-Student: Gvantsa Tchuradze
-Date: October 19, 2025
-Honor Code: I confirm that this submission is entirely my own work and that no part has been plagiarized.
+**Course:** Introduction to Data Science with Python
+**Program:** Computer Science, Kutaisi International University
 
-🌐 Project Description
+---
 
-This project showcases essential programming and data analysis skills using Python and NumPy.
-It includes three interconnected tasks that gradually move from basic Python logic to applied numerical data exploration.
+## Student
 
-No.	Task Title	Core Topic	Grade Weight
-1	Working with Python Data Structures	Dictionaries, control flow, and functions	2%
-2	Exploring NumPy Arrays	Array generation, slicing, aggregation	2%
-3	Simulated Data Analysis	Practical fitness dataset simulation and analytics	2%
+* **Name:** *Gvantsa Tchuradze*
+* **Student ID:** *SXXXX*
+* **Submission Date:** *2025-10-19*
 
-Total Contribution: 6% of course grade
-Submission Deadline: Week 4, Sunday at 23:59 (GT)
+**Honor Code:** I certify that this work is my own and I have not plagiarized.
 
-🔹 Task 1 — Python Data Structures and Logic
+---
 
-A small-scale system to evaluate and summarize student performance using core Python features.
+## Project Overview
 
-Core Components
+This repository contains the solution for **Project 1: Python & NumPy Fundamentals** (October 2025). The project implements three tasks:
 
-A dictionary named students storing:
+* **Task 1 — Python Data Structures & Control Flow**: processing student exam scores and attendance using pure Python.
+* **Task 2 — NumPy Arrays & Operations**: creating, exploring, and analyzing temperature and sales arrays.
+* **Task 3 — Applied Data Analysis**: simulated fitness-tracking dataset (100 users × 90 days × 4 metrics), cleaning pipeline and analysis using NumPy.
 
-student name
+This repository is prepared according to the course submission guidelines and verified to run without errors (restart kernel & run all).
 
-test scores
+---
 
-attendance records
+## Repository structure
 
-Functions to:
+```
+KIU-DS-Project1-FirstName-LastName/
+├─ Project1_FirstName_LastName.ipynb   # Preferred submission (Jupyter Notebook)
+├─ Project1_FirstName_LastName.py      # Or Python script version
+├─ README.md                           # This file
+├─ requirements.txt                     # numpy==1.24.3
+├─ .gitignore                           # recommended (pycache, .ipynb_checkpoints)
+└─ data/                                # (optional) sample outputs or saved CSVs
+```
 
-compute averages and letter grades
+---
 
-determine pass/fail based on attendance and grades
+## Requirements
 
-list top-performing students
+* Python 3.10+ recommended
+* `numpy==1.24.3` (exact version required by course)
 
-summarize grade distribution
+Install dependencies with:
 
-Expected Output
+```bash
+pip install -r requirements.txt
+```
 
-Overall class performance report
+`requirements.txt` content (required by course):
 
-Top 5 students with grades
+```
+numpy==1.24.3
+```
 
-List of failed students and reasons
+---
 
-Grade distribution summary table
+## How to run
 
-🔹 Task 2 — NumPy Arrays and Analytical Operations
+**Python script:**
 
-This section demonstrates efficient numerical manipulation using NumPy arrays.
+```bash
+python Project1_FirstName_LastName.py
+```
 
-Main Goals
+Make sure the script prints the requested outputs for each task (Course statistics, top performers, temperature and sales analyses, Task 3 console summary, etc.).
 
-Array Initialization:
+---
 
-Daily temperatures dataset (365×5)
+## Summary of findings (Task 3)
 
-Yearly sales data (12×4)
+*This section provides the required analysis summary of the simulated fitness dataset (≥300 words).*
 
-Identity, evenly spaced, and reshaped arrays
+The simulated dataset models 100 users across 90 days with 4 metrics: daily steps, calories, active minutes, and average heart rate. After introducing realistic data issues (5% random NaNs to mimic device failures and 2% extreme outliers) the data cleaning pipeline removed outliers using the IQR method per metric and then replaced missing values with per-metric means. This two-step approach reduces bias from extreme values when computing imputation values. The cleaned dataset enables reliable per-user aggregation and population-level temporal analysis.
 
-Indexing & Selection:
+Key user behavior patterns show a diversified activity distribution. Users cluster into three activity bands (Low/Medium/High) based on step percentiles: roughly 25% low, 50% medium, 25% high. The top 10 active users (by combined z-score across metrics) show consistent high daily step counts, elevated active minutes, and slightly higher-than-average calorie burn, suggesting a correlation between steps and calories. Consistency analysis (lowest mean std deviation across metrics) highlights a subset of users with predictable daily routines — useful for personalized recommendations.
 
-Extract data by time periods or conditions (months, weekends, etc.)
+Temporal trends reveal weekly periodicity with day-of-week effects: higher activity on mid-week days and small dips on weekends for the aggregate population, though subgroups behave differently. A 7-day rolling mean smooths daily volatility and uncovers subtle increasing/decreasing trends; linear slope estimation per metric is used to quantify trend directions. Month-over-month growth (three 30-day windows) provides coarse-grained seasonality — useful for marketing campaigns or feature-testing windows.
 
-Boolean & Fancy Indexing:
+Correlation analysis indicates expected relationships: steps and calories are positively correlated; active minutes correlate with steps and calories; average heart rate correlates weakly with other metrics. Age shows a modest negative correlation with average steps, while gender-based averages differ slightly — insights that can inform targeted interventions.
 
-Identify extreme values (hot/cold days)
+Health score (a weighted z‑sum) ranks users by a composite measure; selecting weights (0.4 steps, 0.2 calories, 0.35 active_minutes, 0.05 heart rate) emphasizes physical activity. Goal achievement analysis (8000 steps, 2000 calories, 60 active minutes) reports the fraction of days each user meets all goals; a small subset meets goals ≥80% of days and can be considered consistent achievers for rewards or beta features.
 
-Apply masks and data replacements
+**Most surprising finding:** The dataset often shows more consistent achievers than purely random data would suggest because of the lognormal steps generation and clipping that concentrates values around realistic daily step medians — a reminder that synthetic data choices strongly shape downstream conclusions.
 
-Statistical Computations:
+**Recommendations:** (1) Use targeted nudges for medium-activity users to convert them to higher engagement; (2) Investigate device reliability and missingness patterns before production deployment; (3) Consider per-user baselines when defining goals to avoid penalizing older or less active users unjustly. Further improvements include richer metadata (occupation, device type) and longer time windows to assess retention effects.
 
-Mean, median, variance, correlations, and moving averages
 
-Sales Analytics:
+If you have questions about this repository, email: [your.email@example.com](mailto:your.email@example.com)
 
-Total sales per category, best month detection, and category comparison
+---
 
-🔹 Task 3 — Fitness Data Simulation and Analysis
-
-A complete analytical workflow built exclusively with NumPy, simulating daily fitness activity for 100 users over 90 days.
-
-Dataset Details
-
-Shape: (100, 90, 4) → users × days × [steps, calories, active minutes, heart rate]
-
-Value ranges:
-
-Steps: 2000–15000
-
-Calories: 1500–3500
-
-Active minutes: 20–180
-
-Heart rate: 60–120 bpm
-
-Data Enrichment
-
-5% missing values (sensor malfunction simulation)
-
-2% outliers (unrealistic activity spikes)
-
-Metadata array: [user_id, age (18–70), gender (0 = female, 1 = male)]
-
-Data Cleaning Functions
-
-handle_missing(data) — replaces NaN values with column means
-
-remove_outliers(data, metric_index) — detects outliers via IQR and replaces them with median values
-
-The pipeline ensures the dataset remains complete and realistic after cleaning.
-
-Analytical Components
-
-User-Level Insights:
-
-Mean performance, top 10 active users, consistency evaluation
-
-Activity classification by overall engagement level
-
-Time-Based Analysis:
-
-Weekly averages, rolling 7-day trends, and linear change estimation
-
-Correlations & Demographics:
-
-4×4 metric correlation matrix
-
-Relationship between age, gender, and activity
-
-Computation of a composite Health Index
-
-Goal Achievement Tracking:
-
-Success if: steps ≥ 8000, calories ≥ 2000, minutes ≥ 60
-
-Users achieving all goals ≥80% of the time identified
-
-📈 Findings Overview
-Aspect	Main Observation
-Avg. daily steps	Around 8,000–9,000
-Steps ↔ Active minutes	Strong positive correlation
-Age vs activity	Slight negative trend
-Gender comparison	Males slightly more active overall
-Highly consistent users	15–20 participants met goals 80%+
-General trend	Gradual improvement over 3 months
-🧩 Interpretations
-
-7-day moving averages revealed weekly cycles, with weekends showing reduced activity.
-
-Daily steps, calories, and active minutes are closely interrelated.
-
-Heart rate patterns show weaker links, likely due to personal physiological differences.
-
-Activity declines slightly with increasing age.
-
-A standardized “health score” derived from z-scores provides a balanced user comparison metric.
-
-💬 Suggestions
-For Individuals
-
-Aim for consistent daily effort rather than short bursts.
-
-Focus on achieving at least two goals per day (steps, calories, minutes).
-
-For App Developers
-
-Add weekly trend summaries and visual dashboards.
-
-Implement streak badges and adaptive daily targets for better user motivation.
-
-For Marketing Teams
-
-Engage moderately active users (middle 50%) through group challenges.
-
-Support less active users via tailored goal reminders and milestone rewards.
-
-⚙️ How to Execute the Project
-
-Download or clone the project folder.
-
-Ensure the environment meets requirements:
-
-Python >= 3.9  
-NumPy >= 1.24.3
-
-
-Run the following scripts sequentially:
-
-python task1.py
-python task2.py
-python task3.py
+*Prepared for: Introduction to Data Science with Python — Project 1*
